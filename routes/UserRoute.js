@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const router = Router();
-const User = require("../models/index");
+const { User, Show } = require("../models/index");
+
+// TODO: Do not send the password in the response.
 
 router.get("/", async (req, res, next) => {
   try {

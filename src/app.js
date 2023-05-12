@@ -7,7 +7,7 @@ const user = require("../routes/UserRoute");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", show);
-app.use("/", user);
+app.use("/shows", show);
+app.use("/users", user);
 
 module.exports = app;
