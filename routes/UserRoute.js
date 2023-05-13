@@ -6,8 +6,6 @@ const { or } = require("sequelize");
 // TODO: More effective error handeling
 // TODO: Do not send the password in the response.
 
-// Do i need to thow an error in try block?
-
 // GET all users
 // Should I thow an error id no users found, there may not be any users yet.
 router.get("/", async (req, res, next) => {
@@ -25,9 +23,9 @@ router.get("/:id", async (req, res, next) => {
     const id = req.params.id;
     const userAtId = await User.findByPk(id);
 
-    // Thows error, res 404 and sends res message if no user at id
+    // Throws error passes to next
     if (!userAtId) {
-      res.status(404).send("User not found");
+      throw new Error("User not found");
     }
 
     // Runs if user at id found
@@ -37,17 +35,17 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// GET all shows watched by a user (user id in req.params)
+// GET all shows watched by a user
 router.get("/:id/shows", async (req, res, next) => {
   try {
     const id = req.params.id;
     // include gets data from shows table that relates to user
     const user = await User.findByPk(id, { include: Show });
 
-    // Thows error, res 404 and error message if no user
+    // Throws error passes to next
     // Do I need to thow an error if no shows, maybe has not watched shows yet?
     if (!user) {
-      res.status(404).send("User not found");
+      throw new Error("User not found");
     }
 
     // Runs if user and show found
@@ -57,20 +55,19 @@ router.get("/:id/shows", async (req, res, next) => {
   }
 });
 
-//PUT update and add a show if a user has watched it
-
+//PUT adds a show to a user if they have watched it
 router.put("/:id/shows/:showId", async (req, res, next) => {
   try {
     const { id, showId } = req.params;
     const user = await User.findByPk(id);
     const show = await Show.findByPk(showId);
 
-    // Thows error, res 404 and sends res message if no user/ show found
+    // Throws error passes to next
     if (!user) {
-      res.status(404).send("User not found");
+      throw new Error("User not found");
     }
     if (!show) {
-      res.status(404).send("Show not found");
+      throw new Error("Show not found");
     }
 
     // Runs if user and show found
