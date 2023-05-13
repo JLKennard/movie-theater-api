@@ -1,8 +1,8 @@
 const Show = require("./Show");
 const User = require("./User");
 
-User.belongsToMany(Show, { through: "show_user" });
-Show.belongsToMany(User, { through: "show_user" });
+User.hasMany(Show);
+Show.belongsTo(User);
 
 module.exports = {
   Show,

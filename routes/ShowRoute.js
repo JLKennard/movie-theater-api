@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const router = Router();
 const { Show } = require("../models/index");
-const { db } = require("../db/connection");
 
+// TODO: More effective error handeling
+
+// GET all shows
 router.get("/", async (req, res, next) => {
   try {
     const show = await Show.findAll();
@@ -12,6 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// GET show at ID
 router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -22,8 +25,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// GET shows of a particular genre (genre in req.params)
-
+// GET shows of a particular genre
 router.get("/genres/:genre", async (req, res, next) => {
   try {
     const genre = req.params.genre;
