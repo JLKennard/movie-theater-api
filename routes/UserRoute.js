@@ -5,6 +5,7 @@ const { or } = require("sequelize");
 
 // TODO: More effective error handeling
 // TODO: Do not send the password in the response.
+// Change the password to provate from the Model?
 
 // GET all users
 // Should I thow an error id no users found, there may not be any users yet.

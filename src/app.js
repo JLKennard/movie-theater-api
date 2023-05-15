@@ -12,4 +12,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/shows", show);
 app.use("/users", user);
 
-module.exports = app;
+module.exports = { app, show, user };
