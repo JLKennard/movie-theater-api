@@ -10,7 +10,7 @@ const { or } = require("sequelize");
 // Should I thow an error id no users found, there may not be any users yet.
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({ attributes: { exclude: ["password"] } });
     res.json(users);
   } catch (err) {
     next(err);
@@ -21,7 +21,9 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;
-    const userAtId = await User.findByPk(id);
+    const userAtId = await User.findByPk(id, {
+      attributes: { exclude: ["password"] },
+    });
 
     // Throws error passes to next
     if (!userAtId) {
