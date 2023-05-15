@@ -72,6 +72,7 @@ router.put("/:id/shows/:showId", async (req, res, next) => {
 
     // Runs if user and show found
     await user.addShow(show);
+    await show.addUser(user);
     res.send("Show added to user's watch list");
   } catch (err) {
     next(err);
