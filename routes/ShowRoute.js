@@ -49,8 +49,9 @@ router.get("/genres/:genre", async (req, res, next) => {
   }
 });
 
-// GET shows users
+// GET show users
 // GET all users that watch show at id
+// TODO Dont return user password
 router.get("/:id/users", async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -80,16 +81,17 @@ router.put("/:id/watched", async (req, res, next) => {
   const currentRating = showAtId.rating;
   const userCount = showAtId.users.length;
 
-  // Current rating * userCount = total of ratings
-  // total of rating + new ratng = new total
-  // userCount incremented
-  // new total / userCount Math to round rating
+  //   option 1
+  //   Current rating * userCount = total of ratings
+  //   total of rating + new ratng = new total
+  //   userCount incremented
+  //   new total / userCount Math to round rating
+  //   Rating Model?
+  //   How to evaluate amount of previous ratings?
 
   // Check if user has watched before rating?
 
   // How to track previous rating number?
-
-  // Rating Model?
 
   res.json(userCount);
 });
